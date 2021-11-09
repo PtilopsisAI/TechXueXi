@@ -123,7 +123,7 @@ TechXueXi为python学 xi 交流的开源非营利项目，仅作为程序员之�
 
 # 📗使用方法 🔧更新方法 💾下载地址
 
-详见： [使用方法-更新方法-下载方式.md](https://github.com/TechXueXi/TechXueXi/blob/dev/%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95-%E6%9B%B4%E6%96%B0%E6%96%B9%E6%B3%95-%E4%B8%8B%E8%BD%BD%E6%96%B9%E5%BC%8F.md)
+详见： [使用方法-更新方法-下载方式](https://github.com/TechXueXi/TechXueXi/wiki/%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95-%E6%9B%B4%E6%96%B0%E6%96%B9%E6%B3%95-%E4%B8%8B%E8%BD%BD%E6%96%B9%E5%BC%8F)
 
 
 
@@ -161,21 +161,16 @@ win平台可能提示`无法定位程序输入点ucrtbase.terminate于动态链�
 ### 🕔 项目计划
 本项目维护计划、路线图参见（TechXueXi 开发团队成员才可以查看） https://github.com/orgs/TechXueXi/projects/2
 
-申请加入 TechXueXi 开发团队参见下方说明
+申请加入 TechXueXi 开发团队参见下方说明 https://github.com/TechXueXi/TechXueXi/issues/2
 
-如您参与贡献，请注意：维护计划、路线图中每一条未列至"Done"下时，仅可在 dev 分支改动。
+如您参与贡献，请注意：维护计划、路线图中每一条未列至"Done"下时，仅可在 developing 分支改动。
 
 ### [👨‍👨‍👦‍👦 直接参与贡献](https://github.com/TechXueXi/TechXueXi/blob/dev/CONTRIBUTING.md)(内附提交方法)
 
 如您开发了其他“科技强国”项目，也可以加入本组织，相互交流，共同维护生态。
 
 ### 🙋‍♂️ 加入组织
-若您有意愿加入本组织，持续对本项目进行维护，请发送主题“申请科技强国组织成员”的邮件至 techxuexi@protonmail.com，请将您的github用户名添加到邮件正文中，便于发送邀请。谢谢。建议使用境外邮箱，不要用国区苹果账号，QQ邮箱，163 等等的邮箱。
-
-### 🟥 Pay Attention
-**如果你的github账户包括个人信息，请重新申请一个github账号专门提交这个项目有关的代码，绑定境外邮箱，不要用国区苹果账号，QQ邮箱，163 等等的邮箱。**  
-
-
+https://github.com/TechXueXi/TechXueXi/issues/2
 
 # 📌关于学 xi 强国
 

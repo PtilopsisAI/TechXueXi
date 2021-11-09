@@ -1,24 +1,21 @@
+import math
 import os
 import sys
 import time
-import math
 from sys import argv
+
 from pdlearn import boot
+
 boot.check_environment()
 try:
     # 在此处导入所有 pdlearn 内的模块
-    from pdlearn import version
-    from pdlearn import user
-    from pdlearn import score
-    from pdlearn import color
-    from pdlearn import threads
+    import pdlearn.globalvar as gl
+    from pdlearn import color, score, threads, user, version
+    from pdlearn.answer_question import daily, weekly, zhuanxiang
+    from pdlearn.article_video import article, video
     from pdlearn.config import cfg_get
     from pdlearn.mydriver import Mydriver
-    from pdlearn.score import show_score
-    from pdlearn.score import show_scorePush
-    from pdlearn.article_video import article, video
-    from pdlearn.answer_question import daily, weekly, zhuanxiang
-    import pdlearn.globalvar as gl
+    from pdlearn.score import show_score, show_scorePush
 except ImportError as e:
     boot.try_pip_install(exception=e)
 
@@ -66,8 +63,12 @@ def start_learn(uid, name):
             msg = "需要增加新用户，请扫码登录，否则请无视"
         else:
             msg = name+" 登录信息失效，请重新扫码"
-        print(msg)
-        gl.pushprint(msg)
+        # print(msg)
+        gl.pushprint(msg, chat_id=uid)
+        if gl.pushmode == "6":
+            gl.pushprint("web模式跳过自动获取二维码,请手动点击添加按钮", chat_id=uid)
+            print(color.red("【#️⃣】 若直接退出请运行：webserverListener.py"))
+            return
         driver_login = Mydriver()
         cookies = driver_login.login()
         driver_login.quit()
@@ -85,7 +86,7 @@ def start_learn(uid, name):
     video_index = 1  # user.get_video_index(uid)
 
     total, scores = show_score(cookies)
-    gl.pushprint(output)
+    gl.pushprint(output, chat_id=uid)
     if TechXueXi_mode in ["1", "3"]:
 
         article_thread = threads.MyThread(
@@ -114,8 +115,8 @@ def start_learn(uid, name):
 
     seconds_used = int(time.time() - start_time)
     gl.pushprint(name+" 总计用时 " + str(math.floor(seconds_used / 60)) +
-                 " 分 " + str(seconds_used % 60) + " 秒")
-    show_scorePush(cookies)
+                 " 分 " + str(seconds_used % 60) + " 秒", chat_id=uid)
+    show_scorePush(cookies, chat_id=uid)
     try:
         user.shutdown(stime)
     except Exception as e:
@@ -132,12 +133,22 @@ def start(nick_name=None):
         user_list.append(["", "新用户"])
     for i in range(len(user_list)):
         try:
-            if nick_name == None or nick_name == user_list[i][1]:
+            if nick_name == None or nick_name == user_list[i][1] or nick_name == user_list[i][0]:
                 _learn = threads.MyThread(
                     user_list[i][0]+"开始学xi", start_learn, user_list[i][0], user_list[i][1], lock=Single)
                 _learn.start()
         except:
             gl.pushprint("学习页面崩溃，学习终止")
+
+
+def get_my_score(uid):
+    get_argv()
+    user.refresh_all_cookies()
+    cookies = user.get_cookie(uid)
+    if not cookies:
+        return False
+    show_scorePush(cookies, chat_id=uid)
+    return True
 
 
 def get_user_list():
@@ -160,20 +171,20 @@ def get_all_user_name():
     return names
 
 
-def add_user():
+def add_user(chat_id=None):
     get_argv()
-    gl.pushprint("请扫码登录：")
+    gl.pushprint("请扫码登录：", chat_id=chat_id)
     driver_login = Mydriver()
-    cookies = driver_login.login()
+    cookies = driver_login.login(chat_id)
     driver_login.quit()
     if not cookies:
-        gl.pushprint("登录超时。")
+        gl.pushprint("登录超时。", chat_id=chat_id)
         return
     user.save_cookies(cookies)
     uid = user.get_userId(cookies)
     user_fullname = user.get_fullname(uid)
     user.update_last_user(uid)
-    gl.pushprint(user_fullname+"登录成功")
+    gl.pushprint(user_fullname+"登录成功", chat_id=chat_id)
 
 
 if __name__ == '__main__':
