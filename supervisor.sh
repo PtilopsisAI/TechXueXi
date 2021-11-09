@@ -17,6 +17,10 @@ user=root
 command=/usr/local/bin/python telegramListener.py
 autostart=false
 autorestart=true
+stdout_logfile=/var/log/tg-listener.log
+stdout_logfile_maxbytes=65535
+stderr_logfile=/var/log/tg-listener.log
+stderr_logfile_maxbytes=65535
 
 EOF
 
